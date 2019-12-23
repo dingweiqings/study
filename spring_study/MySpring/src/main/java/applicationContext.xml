@@ -1,0 +1,12 @@
+<beans>
+	<bean id="student" class="com.ding.entity.Student">
+		<property name="name"  value="Kurt" />
+	</bean> 
+	<bean id="teacher" class="com.ding.entity.Teacher">
+		<property name="student"  ref="student" />
+	</bean> 
+		<bean id="person" class="com.ding.entity.Person">
+		<property name="student"  ref="student" />
+			<property name="teacher"  ref="teacher" />
+	</bean> 
+</beans>
