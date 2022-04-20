@@ -1,0 +1,19 @@
+spring:
+  application:
+    # 应用名
+    name: user-svc
+  cloud:
+    zookeeper:
+      # Zookeeper 地址，此处演示只使用单 Zookeeper 节点，未部署集群
+      connect-string: ccv3.infra.kurt:2181
+      # 服务发现
+      discovery:
+        # 注册自身
+        register: true
+        # 优先注册 IP
+        prefer-ip-address: true
+server:
+  port: 9001
+feign:
+  circuitbreaker:
+    enabled: true

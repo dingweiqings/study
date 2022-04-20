@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: com.ding.rasp.KurtAgentAttacher
+Agent-Class: com.ding.rasp.KurtAgentRewriteTest
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+
