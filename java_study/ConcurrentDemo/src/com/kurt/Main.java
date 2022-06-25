@@ -6,6 +6,8 @@ import java.lang.invoke.MethodType;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import com.kurt.thread.ThreadTest;
+
 public class Main {
 
     public static void main(String[] args) {
