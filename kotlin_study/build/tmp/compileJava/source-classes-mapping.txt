@@ -1,0 +1,2 @@
+com/ding/kotlin/demo/TestDemo.java
+ com.ding.kotlin.demo.TestDemo

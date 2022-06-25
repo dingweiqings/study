@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.20'
+    id "org.jetbrains.kotlin.kapt" version "1.5.20"
+
+
+}
+def arrow_version = "0.13.2"
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+
+    implementation platform("io.arrow-kt:arrow-stack:$arrow_version")
+    implementation "io.arrow-kt:arrow-core"
+
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
