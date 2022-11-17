@@ -8,7 +8,9 @@ target/
 .project
 .settings
 .springBeans
-
+/**/venv
+/**/build
+*.o
 ### IntelliJ IDEA ###
 .idea
 *.iws

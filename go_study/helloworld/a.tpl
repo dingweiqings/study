@@ -1,0 +1,1 @@
+{{if eq  .age  "1.000" }} 正常a {{else}} 异常111111b, curValue: =={{ .age }}== len: {{ len .age }} len1.000{{len "1.000"}}{{end}} 
