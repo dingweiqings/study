@@ -2,10 +2,10 @@ package com.ding.spring.hbernate.study.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+//CLuster
 /**
  * @author kurt.ding
  * @date 2021/11/17 下午5:15
@@ -15,7 +15,11 @@ import javax.persistence.Table;
 @Data
 public class Person {
 	@Id
-	private String id;
+	@GeneratedValue
+	private Long id;
 	private String name;
 	private String age;
+	@OneToOne(cascade = CascadeType.ALL)
+	Child childs ;
+
 }

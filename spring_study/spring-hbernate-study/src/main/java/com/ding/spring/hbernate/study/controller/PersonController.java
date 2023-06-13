@@ -1,5 +1,8 @@
 package com.ding.spring.hbernate.study.controller;
 
+import com.ding.spring.hbernate.study.entity.Child;
+import com.ding.spring.hbernate.study.entity.GrandChild;
+import com.ding.spring.hbernate.study.entity.Person;
 import com.ding.spring.hbernate.study.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,5 +23,20 @@ public class PersonController {
 	public String hello() {
 		personService.update("1");
 		return "SUCCESS";
+	}
+	@GetMapping("hello:cascadeMultiLevel")
+	public void cascadeMultiLevel(){
+		Child child = new Child();
+		GrandChild grandChild = new GrandChild();
+		child.setGrandChildren(grandChild);
+
+		Person person = new Person();
+		person.setChilds(child);
+
+		personService.save(person);
+	}
+	@GetMapping("hello:cascadeMultiLevelQuery")
+	public void cascadeMultiLevelQuery(){
+		System.out.println(personService.findAll());
 	}
 }

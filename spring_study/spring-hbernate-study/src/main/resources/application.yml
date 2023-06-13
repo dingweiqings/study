@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:mysql://ccv3.infra.kurt:3306/test
-    username: app
-    password: Fastone1!
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:postgresql://52.82.77.247:5432/kurt-test-new
+    driver-class-name: org.postgresql.Driver
+    username: sa
+    password: boKYLXIERWnzB0gX
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create

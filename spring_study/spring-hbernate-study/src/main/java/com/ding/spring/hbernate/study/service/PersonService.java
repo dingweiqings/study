@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * @author kurt.ding
@@ -29,5 +31,9 @@ public class PersonService {
 	}
 	public void save(Person person){
 		personRepo.save(person);
+	}
+
+	public List<Person> findAll(){
+		return personRepo.findAll();
 	}
 }
