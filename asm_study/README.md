@@ -1,3 +1,5 @@
+1. 直接汇编
+
 1. c语言调汇编
 call-asm.s
 call-asm.c
