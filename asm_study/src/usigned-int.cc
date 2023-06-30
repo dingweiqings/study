@@ -21,8 +21,6 @@ void pailie(int arr[],int start,int end){
 		result[start]=arr[start];
 		pailie(arr,start+1,end);
 	}
-	printf()
-	{};
 	// std::mutex mutex ;
 	// std::lock_guard<std::mutex> guard(mutex);
 	// std::unique_lock<std::mutex> lock(mutex);
@@ -40,7 +38,7 @@ int main(int argc, char* argv[])
 	// int arr[N]={6,2,3,4,5,1};
 	// pailie(arr,0,N);
 	// printf("total: %d \n",total);
-	int len =24;
+  int len =24;
 	  while ( len-- )
   {
     std::cout<< len<<std::endl;
