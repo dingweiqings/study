@@ -7,8 +7,8 @@
 ; 用于写入磁盘的第 2 个扇区 ！
 ;
 
-%include "..\inc\support.inc"
-%include "..\inc\protected.inc"
+%include "../inc/support.inc"
+%include "../inc/protected.inc"
 
 ;
 ; setup 模块是运行在 16 位实模式下

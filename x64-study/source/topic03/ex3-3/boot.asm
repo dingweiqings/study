@@ -9,8 +9,8 @@
 ; 生成 boot 模块然后，写入 demo.img（磁盘映像）的第 0 扇区(MBR)
 
 
-%include "..\inc\support.inc"
-%include "..\inc\ports.inc"
+%include "../inc/support.inc"
+%include "../inc/ports.inc"
 
 	bits 16
 
@@ -20,7 +20,7 @@
 	
 ; Int 19h 加载 sector 0 (MBR) 进入 BOOT_SEG 段, BOOT_SEG 定义为 0x7c00
  	
-	org BOOT_SEG
+	; org BOOT_SEG
 	
 start:
 	cli

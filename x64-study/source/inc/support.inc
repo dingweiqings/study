@@ -11,21 +11,21 @@
 %define SUPPORT_INC
 
 
-%include "..\inc\CPU.inc"
-%include "..\inc\lib.inc"
-%include "..\inc\clib.inc"
-%include "..\inc\ports.inc"
-%include "..\inc\pci.inc"
-%include "..\inc\debug.inc"
-%include "..\inc\apic.inc"
-%include "..\inc\float.inc"        
-%include "..\inc\task.inc"
-%include "..\inc\sse.inc"
-%include "..\inc\perfmon.inc"
-%include "..\inc\page.inc"
-%include "..\inc\ioapic.inc"
-%include "..\inc\keycode.inc"
-%include "..\inc\hpet.inc"
+%include "../inc/CPU.inc"
+%include "../inc/lib.inc"
+%include "../inc/clib.inc"
+%include "../inc/ports.inc"
+%include "../inc/pci.inc"
+%include "../inc/debug.inc"
+%include "../inc/apic.inc"
+%include "../inc/float.inc"        
+%include "../inc/task.inc"
+%include "../inc/sse.inc"
+%include "../inc/perfmon.inc"
+%include "../inc/page.inc"
+%include "../inc/ioapic.inc"
+%include "../inc/keycode.inc"
+%include "../inc/hpet.inc"
         
 ;*
 ;* 定义各个工作 segment
@@ -79,10 +79,10 @@ LONG_SECTOR             equ     128
 ;* 下面是 merge 合并工具的配置实例
 ;* 根据上面的磁盘扇区结构写入映像文件
 ;* 
-; # ..\..\common\uboot,0,c.img,63,1     # uboot 写入 c.img 63 号扇区
-; # ..\..\common\setup,0,c.img,1,4      # setup 写入 c.img 1 号扇区
-; # ..\..\lib\lib16,0,c.img,20,2        # lib16 写入 c.img 20 号扇区
-; # ..\..\lib\lib32,0,c.img,192,10      # 1ib32 写入 c.img 192 号扇区
+; # ../../common/uboot,0,c.img,63,1     # uboot 写入 c.img 63 号扇区
+; # ../../common/setup,0,c.img,1,4      # setup 写入 c.img 1 号扇区
+; # ../../lib/lib16,0,c.img,20,2        # lib16 写入 c.img 20 号扇区
+; # ../../lib/lib32,0,c.img,192,10      # 1ib32 写入 c.img 192 号扇区
 ; # protected,0,c.img,64,30             # protected 写入 c.img 64 号扇区
 ; # long,0,c.img,128,20                 # long 写入 c.img 128 号扇区
 

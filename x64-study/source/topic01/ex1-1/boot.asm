@@ -12,8 +12,8 @@
 ;
 
 
-%include "..\inc\support.inc"
-%include "..\inc\ports.inc"
+%include "../inc/support.inc"
+%include "../inc/ports.inc"
 
         bits 16
 
@@ -43,12 +43,19 @@ start:
         call clear_screen
 
 ;;实验 ex1-1：测试 byte 内排列        
+myprint:
         mov dword [Foo], 2                      ; 00000000000000000000000000000010B
         bt dword [Foo], 1                       ; 取 bit 1
         setc bl                                 ; bit 1 是否等于 1
         movzx ebx, bl
-        mov si, [message_table + ebx * 2]
+        mov si, [message_table + 2]
         call print_message
+
+        mov si, 1                             ; setup 模块在第20号扇区里
+        mov di, SETUP_SEG - 2
+        call load_module                        ; 使用 load_module() 读多个扇区
+
+        jmp SETUP_SEG                           ;load_module会把磁盘内容读到内存地址处
                 
 next:        
         jmp $
@@ -72,7 +79,7 @@ clear_screen:
         xor bh, 0x0f                                ; white
         mov dh, 24
         mov dl, 79
-        int 0x10
+        int 0x10                                    ;clear screen 最后不用popa?
         
 set_cursor_position:
         mov ah, 02
@@ -89,12 +96,12 @@ set_cursor_position:
 ;--------------------------------
 print_message:
         pusha
-        mov ah, 0x0e
-        xor bh, bh        
+        mov ah, 0x0e ; bios中断的要求，
+        xor bh, bh   
 
 do_print_message_loop:        
-        lodsb
-        test al,al
+        lodsb    ; 加载字符串到al，源字符串在si处
+        test al,al  ;看字符串最后是不是0,是0则结束; test是取与
         jz do_print_message_done
         int 0x10
         jmp do_print_message_loop
@@ -154,8 +161,8 @@ check_int13h_extension:
         mov dl, 0x80                                      ; for hard disk
 %endif        
         mov ah, 0x41
-        int 0x13
-        setc al                                           ; 失败
+        int 0x13        ;如果支持则CF是关闭，不支持则打开CF
+        setc al                                           ;如果cf=1则设置al,为失败
         jc do_check_int13h_extension_done
         cmp bx, 0xaa55
         setnz al                                          ; 不支持
@@ -205,7 +212,7 @@ read_sector:
         push es
         push ds
         pop es
-
+        mov ax,0x0
 ; 测试是否支持 int 13h 扩展功能
         call check_int13h_extension
         test ax, ax
@@ -247,6 +254,7 @@ do_read_sector_done:
 ;                load_module(SETUP_SEG, SETUP_SECTOR);
 ;-------------------------------------------------------------------
 load_module:
+        pusha
         call read_sector                                ; read_sector(sector, buf)
         test ax, ax
         jnz do_load_module_done
@@ -268,7 +276,8 @@ do_load_module_loop:
         test ax, ax
         jz do_load_module_loop
 
-do_load_module_done:  
+do_load_module_done: 
+        popa
         ret
 
 

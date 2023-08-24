@@ -8,8 +8,8 @@
 ; 生成 boot 模块然后，写入 demo.img（磁盘映像）的第 1 扇区(MBR)
 
 
-%include "..\inc\support.inc"
-%include "..\inc\ports.inc"
+%include "../inc/support.inc"
+%include "../inc/ports.inc"
 
         bits 16
 
@@ -40,8 +40,8 @@ start:
         mov si, hello
         call print_message
         
-        mov si, 20                              ; setup 模块在第20号扇区里
-        mov di, SETUP_SEG - 2
+        mov si, 20                             ; setup 模块在第20号扇区里
+        mov di, SETUP_SEG-2                  ; 拷贝到这个内存地址，df为0，递增
         call load_module                        ; 使用 load_module() 读多个扇区
         
         mov si, SETUP_SEG
@@ -205,8 +205,8 @@ read_sector:
         test ax, ax
         jz do_read_sector_extension                ; 支持
 
-        mov bx, di                                ; data buffer
-        mov ax, si                                ; disk sector number
+        mov bx, di                                ; data buffer;从磁盘读进来放入到这个位置es:bx
+        mov ax, si                                ; disk sector number,磁盘扇区号
 ; now: LBA mode --> CHS mode        
         call LBA_to_CHS
 ; now: read sector        
@@ -215,7 +215,7 @@ read_sector:
 %else        
         mov dl, 0                               ; for floppy
 %endif
-        mov ax, 0x201
+        mov ax, 0x201                           ; ah=0x02, al=0x01,al表示读一个扇区
         int 0x13
         setc al                                 ; 0: success  1: failure        
         jmp do_read_sector_done
@@ -242,8 +242,8 @@ do_read_sector_done:
 ;-------------------------------------------------------------------
 load_module:
         call read_sector                        ; read_sector(sector, buf)
-        test ax, ax
-        jnz do_load_module_done
+        test ax, ax                             ; 0 表示成功，1表示失败
+        jnz do_load_module_done                 ; 如果失败了，则提前结束
         
         mov cx, [di]                            ; 读取模块 size
         test cx, cx
@@ -258,7 +258,7 @@ do_load_module_loop:
         jz do_load_module_done 
         inc si
         add di, 0x200
-        call read_sector
+        call read_sector                       ;1个扇区1个扇区去读
         test ax, ax
         jz do_load_module_loop
 

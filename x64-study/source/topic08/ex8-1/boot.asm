@@ -267,7 +267,7 @@ read_sector:
 %else        
         mov dl, 0                                   ; for floppy
 %endif
-        mov ax, 0x201
+        mov ax, 0x02
         int 0x13
         setc al                                      ; 0: success  1: failure        
         jmp do_read_sector_done

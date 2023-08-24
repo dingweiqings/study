@@ -13,8 +13,8 @@
 ;
 
 
-%include "..\inc\support.inc"
-%include "..\inc\ports.inc"
+%include "../inc/support.inc"
+%include "../inc/ports.inc"
 
         bits 16
 

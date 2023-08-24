@@ -8,7 +8,7 @@
 %ifndef PIC_INC
 %define PIC_INC
 
-%include "..\inc\ports.inc"
+%include "../inc/ports.inc"
 
 
 ; 定义 PCI 空间常量

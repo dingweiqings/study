@@ -5,7 +5,7 @@
 %ifndef CPU_INC
 %define CPU_INC
 
-%include "..\inc\ports.inc"
+%include "../inc/ports.inc"
 
 ;*
 ;* ∂®“Â opcode

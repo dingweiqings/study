@@ -7,7 +7,7 @@
 ; 用于写入磁盘的第 2 个扇区 ！
 ;
 
-%include "..\inc\support.inc"
+%include "../inc/support.inc"
 
 ;
 ; setup 模块是运行在 16 位实模式下
@@ -34,7 +34,7 @@ setup_entry:                                    ; 这是模块代码的入口点。
         
         call test_CPUID
         mov si, [message_table + eax * 2]
-        call puts
+        call print_message
                 
         jmp $
         
@@ -45,7 +45,27 @@ message_table           dw no_support_message, support_message, 0
 
 
 
+;--------------------------------
+; print_message()
+; input: 
+;		si: message
+;--------------------------------
+print_message:
+	pusha
+	mov ah, 0x0e
+	xor bh, bh	
 
+do_print_message_loop:	
+	lodsb
+	test al,al
+	jz do_print_message_done
+	int 0x10
+	jmp do_print_message_loop
+
+do_print_message_done:	
+	popa
+	ret
+       
 ;
 ; 以下是这个模块的函数导入表
 ; 使用了 lib16 库的里的函数
