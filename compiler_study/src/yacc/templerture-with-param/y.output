@@ -1,0 +1,124 @@
+语法
+
+    0 $accept: commands $end
+
+    1 commands: %empty
+    2         | commands command
+
+    3 command: heat_switch
+    4        | target_set
+
+    5 heat_switch: TOKHEAT STATE
+
+    6 target_set: TOKTARGET TOKTEMPERATURE NUMBER
+
+
+终结语词，附有它们出现处的规则
+
+$end (0) 0
+error (256)
+NUMBER (258) 6
+TOKHEAT (259) 5
+STATE (260) 5
+TOKTARGET (261) 6
+TOKTEMPERATURE (262) 6
+
+
+非终结语词，附有它们出现处的规则
+
+$accept (8)
+    于左侧： 0
+commands (9)
+    于左侧： 1 2, 于右侧： 0 2
+command (10)
+    于左侧： 3 4, 于右侧： 2
+heat_switch (11)
+    于左侧： 5, 于右侧： 3
+target_set (12)
+    于左侧： 6, 于右侧： 4
+
+
+状态 0
+
+    0 $accept: . commands $end
+
+    $default  使用规则 1 以归约 (commands)
+
+    commands  转到状态 1
+
+
+状态 1
+
+    0 $accept: commands . $end
+    2 commands: commands . command
+
+    $end       偏移，并进入状态 2
+    TOKHEAT    偏移，并进入状态 3
+    TOKTARGET  偏移，并进入状态 4
+
+    command      转到状态 5
+    heat_switch  转到状态 6
+    target_set   转到状态 7
+
+
+状态 2
+
+    0 $accept: commands $end .
+
+    $default  接受
+
+
+状态 3
+
+    5 heat_switch: TOKHEAT . STATE
+
+    STATE  偏移，并进入状态 8
+
+
+状态 4
+
+    6 target_set: TOKTARGET . TOKTEMPERATURE NUMBER
+
+    TOKTEMPERATURE  偏移，并进入状态 9
+
+
+状态 5
+
+    2 commands: commands command .
+
+    $default  使用规则 2 以归约 (commands)
+
+
+状态 6
+
+    3 command: heat_switch .
+
+    $default  使用规则 3 以归约 (command)
+
+
+状态 7
+
+    4 command: target_set .
+
+    $default  使用规则 4 以归约 (command)
+
+
+状态 8
+
+    5 heat_switch: TOKHEAT STATE .
+
+    $default  使用规则 5 以归约 (heat_switch)
+
+
+状态 9
+
+    6 target_set: TOKTARGET TOKTEMPERATURE . NUMBER
+
+    NUMBER  偏移，并进入状态 10
+
+
+状态 10
+
+    6 target_set: TOKTARGET TOKTEMPERATURE NUMBER .
+
+    $default  使用规则 6 以归约 (target_set)
