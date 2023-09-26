@@ -4,24 +4,33 @@ class A
 {
 public:
     int a;
-    virtual ~A(void) {}
+    virtual void af(){
+
+    }
 };
 class B : virtual public A
 {
+    public:
+    int b;
+    virtual void bf(){
+
+    }
 };
 class C : virtual public A
 {
-    virtual void FuncC(void) {}
+    public:
+    int c;
+    virtual void cf(){
+
+    }
 };
 class D : public B, public C
 {
-};
-class E : public B
-{
-    virtual void FuncE(void) {}
-};
-class F : D{
-    virtual void FuncF(void) {}
+    public:
+    int d;
+    virtual void df(){
+
+    }
 };
 
 int main(int argc, char **argv)
@@ -30,8 +39,7 @@ int main(int argc, char **argv)
     B b;
     C c;
     D d;
-    E e;
     printf("%d %d %d %d %d\n",
-           sizeof(A), sizeof(B), sizeof(C), sizeof(D), sizeof(E));
+           sizeof(A), sizeof(B), sizeof(C), sizeof(D));
     return 0;
 }
